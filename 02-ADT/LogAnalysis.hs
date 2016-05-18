@@ -1,6 +1,7 @@
 {-# OPTIONS_GHC -Wall #-}
 -- module LogAnalysis where
 import Log
+import System.IO
 
 parseMessage :: String -> LogMessage
 parseMessage msg@('I':xs)
@@ -23,3 +24,7 @@ parseMessage msg@('E':xs)
                             in LogMessage (Error code) severity message
     | otherwise = Unknown msg
 parseMessage x = Unknown x
+
+parse :: String -> [LogMessage]
+parse content = map parseMessage $ lines content
+
